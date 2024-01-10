@@ -1,0 +1,32 @@
+@import "../../styles/variables.scss";
+
+#index-page{
+    width: 100vw;
+    min-height: 90vh;
+    height: auto;
+    background-color: $inputBackgroundColor;
+    display: grid;
+    grid-template-columns: 20.0% 60.0% 20.0%;
+    grid-template-rows: 100% 100% 100%;
+    overflow-y: scroll;
+    text-align: center;
+}
+
+@media(max-width: 1024px) {
+    #index-page{
+        grid-template-columns:66.66% 33.33%;
+        grid-template-rows: 100% 100%;
+    }
+    #left-section{
+        display: none;
+    }
+
+}
+@media(max-width: 876px) {
+    #index-page{
+        grid-template-columns:100%;
+        grid-template-rows: 100%;
+
+    }
+
+}

@@ -1,0 +1,18 @@
+@import "../../styles/functions.scss";
+
+#auth-main{
+    width: 100vw;
+    height:92vh;
+    background-color: $inputBackgroundColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media  (max-width:475px) {
+    #auth-layout{
+        header{
+            display: none;
+        }
+    }
+}

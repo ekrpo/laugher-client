@@ -1,0 +1,20 @@
+@import "../../styles/variables.scss";
+
+.follow-btns{
+    width: 100px;
+    height: 35px;
+    border: none;
+    border-radius: 10px;
+}
+#follow-btn{
+    background-color: rgba(0, 153, 255, 0.247);
+    color: rgb(18, 103, 172);
+}
+
+#unfollow-btn{
+    background-color: $inputBackgroundColor;
+    color: black;
+}
+.me{
+    opacity: 0;
+}

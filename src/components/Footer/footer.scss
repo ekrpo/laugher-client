@@ -1,0 +1,43 @@
+@import "../../styles/functions.scss";
+@import "../../styles/variables.scss";
+
+footer{
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    footer {
+        @include centerItems();
+        @include edgeTabs();
+    
+        justify-content: space-around;
+        position: fixed;
+        bottom: 0px;
+    
+        img{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        svg{
+            background-color: rgb(18, 103, 172);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        img:hover, svg:hover{
+            width: 45px;
+            height: 45px;
+        }
+        .clicked{
+            border: 5px solid rgb(18, 103, 172);
+        }
+    }
+}
+
+
+

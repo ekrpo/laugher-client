@@ -1,0 +1,70 @@
+ @import "../../styles/variables.scss";
+ @import "../../styles/functions.scss";
+
+#signup-form {
+    width: 475px;
+    height: 600px;
+    padding: 30px;
+    border: 3px solid rgb(18, 103, 172);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 20px;
+    background-color: white;
+    margin-top: 10px;
+    h2 {
+        color: rgb(18, 103, 172);
+        margin-top: 0px;
+        font-size: 28pt;
+    }
+
+    #names {
+        width: 90%;
+        height: auto;
+        @include centerItems();
+        justify-content: space-between;
+        label{
+            width: 45%
+        }
+    }
+
+    label{
+        @include labelStyle();
+
+    }
+    input {
+        @include inputStyle();
+        height: 30px;
+        font-size: 14px;
+    }
+    #birthday-label {
+        @include centerItems();
+        justify-content: space-between;
+        input {
+            width: 50%
+        }
+    }
+
+    button {
+        @include successButton();
+        width: 200px;
+        height: 25pt;
+        
+    }
+
+    #alternative-option {
+        margin: 0px;
+        font-size: 12px;
+        a{
+            color: rgb(18, 103, 172);
+        }
+    }
+}
+
+@media (max-width: 475px) {
+    #signup-form{
+        height: 100%;
+        border: none;
+    }
+}

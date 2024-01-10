@@ -1,0 +1,89 @@
+
+
+#reactions-view{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 10px;
+    min-width: 500px;
+    min-height: 650px;
+    padding: 10px;
+    box-shadow: -1px 2px 790px 100% rgba(0,0,0,0.74);
+    -webkit-box-shadow: -1px 2px 79px 2000px rgba(0,0,0,0.74);
+    -moz-box-shadow: -1px 2px 79px 200px rgba(0,0,0,0.74);
+
+    hr{
+        margin: 0;
+    }
+    #reactions-header{
+        width: 100%;
+        height: 20%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        #close-btn{
+            cursor: pointer;
+        }
+    }
+    #reactions-container{
+        width: 100%;
+        height: 80%;
+
+        .single-reaction{
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            #reaction-values, #reaction-user-info{
+                min-width: 150px;
+                width: 30%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            #reaction-user-info{
+                justify-content: left;
+                img{
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    margin-right: 5px;
+                }
+            }
+
+            #reaction-values{
+                justify-content: right;
+                #reaction-value-container{
+                    width: 100px;
+                    height: 16px;
+                    background-color: gray;
+                    border: 2px solid black ;
+                    #reaction-value{
+                        width: 0%;
+                        height: 100%;
+                        background-color: rgb(18, 103, 172);
+                    }
+                }
+                p{
+                    margin-right: 5px;
+                    margin-left: 5px;
+                }
+            }
+
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    #reactions-view{
+        min-width: 85vw;
+        width: 95vw;
+        min-height: 80vh;
+        top:46%;
+    }
+}

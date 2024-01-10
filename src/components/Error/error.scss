@@ -1,0 +1,21 @@
+#error-container{
+    position: absolute;
+    top: 10vh;
+    width: auto;
+    min-height: 18px;
+    padding: 10px;
+    height: auto;
+    font-size: 12px;
+    color: red;
+    background-color: rgba(255, 0, 106, 0.26);
+    text-align: justify;
+    border: 1px solid red;
+    border-radius: 5px;
+}
+
+@media (max-width: 800px){
+    #error-container{
+        top: 20vh;
+    }
+}
+

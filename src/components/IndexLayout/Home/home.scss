@@ -1,0 +1,220 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/functions.scss";
+
+#home-section{
+    display: block;
+    .loading{
+        width: 50px;
+        height: 50px;
+        margin: 0 auto;
+    }
+    #sort-form{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 95%;
+        margin: 0 auto;
+        margin-top: 15px;
+        hr{
+            color: rgb(241, 241, 241);
+        }
+        #left-line{
+            width: 60%;
+        }
+        #right-line{
+            width: 10%;
+        }
+        select{
+            min-width: 120px;
+            width: 25%;
+            border: none;
+        }
+    }
+    #battles-container{
+        width: 95%;
+        height: 150px;
+        background-color: white;
+        border-radius: 20px;
+        @include centerItems();
+        justify-content: left;
+        margin: 0 auto;
+        margin-top: 20px;
+        overflow-x: scroll;
+
+
+        #battle-profile-pic {
+            width: 70px;
+            height: 70px;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            border: 2px solid $secondBackgroundColor;
+            margin-left: 50px;
+        }
+    }
+
+    #joke-form{
+        margin: 0 auto;
+        width: 95%;
+        height: 120px;
+        border-radius: 20px;
+        margin-top: 25px;
+
+        #enters-container{
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            border-radius: 10px;
+            hr{
+                color: rgb(247, 247, 247);
+                width: 98%;
+                margin: 0;
+            }
+            .input-container{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                height: 50%;
+                margin: auto 0;
+                span{
+                    display: flex;
+                    align-items: center;
+                    margin-left: 10px;
+                    width: 80%;
+                    img{
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 50% ;
+                        margin-right: 5px;
+                    }
+                }
+                #joke-btn-span{
+                    width: 20%;
+                    justify-content: right;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+                    button{
+                        width: 45%;
+                        height: 35px;
+                        background-color: rgba(0, 153, 255, 0.247);
+                        color: blue;
+                        border: none;
+                        border-radius: 5px;
+                    }
+                    #discard-btn{
+                        background-color: rgb(236, 44, 44) !important;
+                        width: 45%;
+                        height: 35px;
+                        color: white;
+                        margin-right: 10px;
+                        margin-left: 5px;
+                    }
+                }
+
+            }
+            textarea{
+                width:100%;
+                height: 35px;
+                border: none;
+                background-color: $inputBackgroundColor;
+                border-radius: 10px;
+                font-size: 16px;
+            }
+
+            #media-btns-container{
+                width: 100%;
+                height: 35px;
+                margin-top: 10px;
+                @include centerItems();
+                justify-content: space-between;
+                align-items: center;
+                svg{
+                    color: rgb(18, 103, 172);
+                }
+                .styled-audio-input{
+                    width: 48.5%;
+                    height: 100%;
+                    border: none;
+                    background-color: rgba(0, 153, 255, 0.247);
+                    color: rgb(18, 103, 172);
+                    display: inline-block;
+                    text-align: center;
+                    margin-right: 10px;
+
+                }
+
+                .audio-container, #audio-player{
+                    width: 48.5%;
+                    height: 100%;
+                    margin-left: 5px;
+                    background-color: rgba(0, 153, 255, 0.247);
+                    @include centerItems();
+                    justify-content: space-between;
+                    #audio-timer{
+                        margin: 0;
+                        font-size: 20px;
+                        color: rgb(18, 103, 172);
+
+                    }
+                    svg{
+                        color: rgb(18, 103, 172);
+                        font-size: 20px;
+
+                    }
+                    #stop-audio-btn{
+                        svg{
+                            color: red;
+                        }
+                    }
+                    audio{
+                        width: 90%;
+                        height: 100%;
+                    }
+                    #audio-trash{
+                        margin-right: 2%;
+                    }
+                }
+
+
+                #photo-upload-btn{
+                    display: none;
+                }
+                .styled-photo-upload{
+                    margin-right: 5px;
+                    width: 48.5%;
+                    height: 100%;
+                    display: inline-block;
+                    background-color: rgba(0, 153, 255, 0.247);
+                    text-align: center;
+                    margin-left: 10px;
+                }
+                .disabled{
+                    background-color: rgb(114, 114, 114);
+                }
+                svg{
+                    vertical-align: middle;
+                    margin-top: 4px;
+                }
+            }
+        }
+        #final-buttons{
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: end;
+            justify-content: right;
+            button{
+                margin-left: 10px;
+                border: none;
+                width: 100px;
+                height: 25px;
+            }
+
+            #upload-btn{
+                background-color: rgb(18, 103, 172);
+                color: white;
+            }
+        }
+    }
+}
+
+

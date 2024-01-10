@@ -1,0 +1,103 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/functions.scss";
+
+#messenger-container{
+    width: 18%;
+    height: 87%;
+    background-color: white;
+    margin: 0 auto;
+    margin-top: 20px;
+    position: fixed;
+    border-radius: 10px;
+    right: 20px;
+    #messenger-header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        h1{
+            margin-left: 5px;
+        }
+        svg{
+            margin-right: 5px;
+            font-size: 24px;
+        }
+    }
+
+    #messenger-search-form {
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        input {
+            width: 95%;
+            height: 35px;
+            border-radius: 5px ;
+            border: none;
+            background-color: $inputBackgroundColor;
+        }
+    }
+    #messenger-item{
+        width: 100%;
+        height: 50px;
+        background-color: white;
+        border-top: 1px solid $inputBackgroundColor;
+        border-bottom: 1px solid $inputBackgroundColor;
+        background-color: white;
+        @include centerItems();
+        justify-content: space-between;
+        cursor: pointer;
+
+        #user-data{
+            min-width: 100px;
+            @include centerItems();
+            justify-content: left;
+
+            h4 {
+                margin-left: 15px;
+            }
+            #messenger-image-container{
+                width: 40px;
+                height: 40px;
+                position: relative;
+                left: 10px;
+                img{
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                }
+                #active-status {
+                    width: 15px;
+                    height: 15px;
+                    border-radius: 50%;
+                    background-color: rgb(6, 158, 6);
+                    margin-right: 5px;
+                    position: absolute;
+                    left: 28px;
+                    top: 28px;
+                    z-index: 1;
+                }
+            }
+
+
+        }
+
+    }
+}
+@media (max-width:1024px) {
+    #messenger-container{
+        width: 30%;
+    }
+}
+
+@media (max-width: 876px){
+   #messenger-container{
+        width: 100%;
+        height: 100%;
+        margin-top: 0px;
+        position: relative;
+        border-radius: 0px;
+        border-top: 1px solid $inputBackgroundColor;
+        right: 0px;
+   }
+
+}

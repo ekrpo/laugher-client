@@ -1,0 +1,24 @@
+@import "../../styles/functions.scss";
+@import "../../styles/variables.scss";
+
+
+#comment-form {
+    min-height: 50px;
+    height: auto;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    min-width: 50%;
+    textarea{
+        width: 95%;
+        border: none;
+    }
+    button{
+        width: 30px;
+        height: 30px;
+        border: none;
+        background-color: rgb(18, 103, 172);
+        color: white;
+        border-radius: 5px;
+    }
+}
