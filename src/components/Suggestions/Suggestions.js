@@ -33,7 +33,7 @@ function Suggestions() {
 
 
     return <div id="suggested-profiles-list">
-        {suggestions.map(user => {
+        {suggestions && suggestions.map(user => {
             return <div id="profile-item">
                 <div id="users-data" onClick={() => window.location = `/user/${user.id}`}>
                     <img id="sugg-profile-picture" src={user.profile_picture_url != null ? user.profile_picture_url : "default_profile.png"} alt="" />
