@@ -26,7 +26,7 @@ function SignIn() {
             window.localStorage.setItem("firstName", result.data.firstName)
             window.localStorage.setItem("lastName", result.data.lastName)
             window.localStorage.setItem("id", result.data.id)
-            window.location = redirectUrl
+            window.location = "/"
         })
         .catch(err => {
             setError(err.response.data.errMessage)
