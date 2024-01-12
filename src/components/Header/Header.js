@@ -29,7 +29,7 @@ function Header({socket}) {
       const searchTerm = e.target.value.trim() === "" ? "" : e.target.value.trim();
       setSearchedInput(searchTerm);
 
-      const result = await authorizedGetRequest(`/user/search/${searchTerm}`);
+      const result = await authorizedGetRequest(`https://laugher-server.onrender.com/user/search/${searchTerm}`);
       if (result && result.data !== null) {
         setSearchedUsers(result.data);
       }
@@ -40,7 +40,7 @@ function Header({socket}) {
 
   async function getNotificationCounter(){
     try {
-      const data = await axios.get("/notifications/notification-counter")
+      const data = await axios.get("https://laugher-server.onrender.com/notifications/notification-counter")
       setNotificationCounter(data.data.notification_counter)
     } catch (error) {
       console.log(error)

@@ -39,7 +39,7 @@ function Joke({socket, joke, setJokes, jokes }) {
       };
       try {
         const { data, err } = await authorizedPostRequest(
-          "/reaction/add",
+          "https://laugher-server.onrender.com/reaction/add",
           payload,
           {}
         );
@@ -61,7 +61,7 @@ function Joke({socket, joke, setJokes, jokes }) {
     const fetchData = async () => {
       try {
         const result = await authorizedGetRequest(
-          `/comment/all/${jokeId}/${offset}`
+          `https://laugher-server.onrender.com/comment/all/${jokeId}/${offset}`
         );
         if (result.data != null) {
           if (offset === 0) {
@@ -105,7 +105,7 @@ function Joke({socket, joke, setJokes, jokes }) {
   function getReactions(jokeId) {
     const fetchData = async () => {
       try {
-        const result = await authorizedGetRequest(`/reaction/joke/${jokeId}`);
+        const result = await authorizedGetRequest(`https://laugher-server.onrender.com/reaction/joke/${jokeId}`);
         if (result.data != null) {
           setReactions(result.data);
         }
@@ -122,7 +122,7 @@ function Joke({socket, joke, setJokes, jokes }) {
 
   async function deleteJoke(jokeId) {
     const { data } = await authorizedDeleteRequest(
-      `/joke/delete/${jokeId}`
+      `https://laugher-server.onrender.com/joke/delete/${jokeId}`
     );
     if (data != null) {
       setJokes(jokes.filter((jokeItem) => jokeItem.id !== jokeId));
@@ -131,7 +131,7 @@ function Joke({socket, joke, setJokes, jokes }) {
 
   async function editJoke(jokeId) {
     const { data } = await authorizedPostRequest(
-      `/joke/edit/${jokeId}`,
+      `https://laugher-server.onrender.com/joke/edit/${jokeId}`,
       {
         description: editDescription,
       },

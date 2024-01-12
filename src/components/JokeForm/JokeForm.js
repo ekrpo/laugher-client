@@ -61,7 +61,7 @@ function JokeForm({jokes, setJokes}){
 
         async function postData(){
             setUploading(true)
-            const {data, err} = await authorizedPostRequest("/joke/create", jokeData, {
+            const {data, err} = await authorizedPostRequest("https://laugher-server.onrender.com/joke/create", jokeData, {
                 "Content-Type": "multipart/form-data"
             })
             if(data != null){

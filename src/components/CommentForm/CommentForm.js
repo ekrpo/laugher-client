@@ -21,7 +21,7 @@ function CommentForm({item, commentCounter, setCommentCounter, setComments, joke
             authorId: joke.author_id
         }
         async function postData(){
-            const {data, err} = await authorizedPostRequest("/comment/add", payload, {})
+            const {data, err} = await authorizedPostRequest("https://laugher-server.onrender.com/comment/add", payload, {})
             if(data != null){
                 item.replies += 1
                 setCommentCounter(commentCounter + 1)

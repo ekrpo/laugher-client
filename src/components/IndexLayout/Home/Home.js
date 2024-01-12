@@ -14,7 +14,7 @@ function HomePage({ socket, tab, setTab }) {
   const fetchData = async (type) => {
     setIsLoading(true)
     try {
-      const requestURL = `/joke/${tab}/${type}/0`;
+      const requestURL = `https://laugher-server.onrender.com/joke/${tab}/${type}/0`;
 
       const result = await authorizedGetRequest(requestURL);
       if (result.data !== null) {

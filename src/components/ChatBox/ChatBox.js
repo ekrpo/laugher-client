@@ -33,7 +33,7 @@ function ChatBox({ socket, closeChat, user }) {
       message: message,
     };
 
-    await authorizedPostRequest(`/message/add`, payload, {});
+    await authorizedPostRequest(`https://laugher-server.onrender.com/message/add`, payload, {});
 
     setMessage("");
     scrollToBottom();
@@ -42,7 +42,7 @@ function ChatBox({ socket, closeChat, user }) {
 async function getMessages() {
   try {
     setIsLoading(true)
-    const { data } = await authorizedGetRequest(`/message/all/${user.id}/${offset}`);
+    const { data } = await authorizedGetRequest(`https://laugher-server.onrender.com/message/all/${user.id}/${offset}`);
     if (data !== null && data.length > 0) {
       // Save the current scroll position before loading more messages
       const currentScrollTop = conversationContainerRef.current.scrollTop;

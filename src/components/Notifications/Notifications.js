@@ -22,8 +22,8 @@ function Notifications({setNotifToggle, notifToggle}){
 
     async function getUserNotifications(){
         try {
-            const data = await axios.get("/notifications")
-            await axios.put("/notifications/clear-counter")
+            const data = await axios.get("https://laugher-server.onrender.com/notifications")
+            await axios.put("https://laugher-server.onrender.com/notifications/clear-counter")
             console.log(data.data)
             setNotifications(data.data.reverse())
             

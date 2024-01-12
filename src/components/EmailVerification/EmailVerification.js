@@ -9,7 +9,7 @@ function EmailVerification() {
     function submit(e) {
         e.preventDefault()
 
-        axios.post("/auth/email-verification", {
+        axios.post("https://laugher-server.onrender.com/auth/email-verification", {
             verificationCode:code
         })
         .then(result => {

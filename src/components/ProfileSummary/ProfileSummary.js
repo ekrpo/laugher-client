@@ -12,7 +12,7 @@ function ProfileSummary({userId}){
     useEffect(()=>{
         const fetchData = async () => {
             try {
-                const result = await authorizedGetRequest(`/user/info/${userId || 0}`)
+                const result = await authorizedGetRequest(`https://laugher-server.onrender.com/user/info/${userId || 0}`)
                 if(result && result.data != null){
                     setUsersInfo({...usersInfo, 
                         followings: result.data.followings, 

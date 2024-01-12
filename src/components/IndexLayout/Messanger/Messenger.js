@@ -24,7 +24,7 @@ function Messenger({socket}) {
 
   async function getFollowingUsers() {
     try {
-      const { data } = await authorizedGetRequest("/follow/get/following");
+      const { data } = await authorizedGetRequest("https://laugher-server.onrender.com/follow/get/following");
       if (data != null) {
         setFollowing(data);
         setFiltered(data);

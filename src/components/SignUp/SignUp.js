@@ -18,7 +18,7 @@ function SignUp() {
     function submit(e) {
         e.preventDefault()
 
-        axios.post("/auth/signup", userData)
+        axios.post("https://laugher-server.onrender.com/auth/signup", userData)
         .then(result => {
             const response = result.data
             window.location = response.redirectUrl

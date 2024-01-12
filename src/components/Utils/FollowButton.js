@@ -7,7 +7,7 @@ function FollowButton({userId, followId}) {
     const id = window.localStorage.getItem("id")
 
     async function follow(userId){
-        const {data, err } = await authorizedPutRequest(`/follow/${userId}`)
+        const {data, err } = await authorizedPutRequest(`https://laugher-server.onrender.com/follow/${userId}`)
         if(data != null){
             setFollowing(true)
         }

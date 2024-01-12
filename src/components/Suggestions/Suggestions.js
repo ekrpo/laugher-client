@@ -11,7 +11,7 @@ function Suggestions() {
 
             const fetchData = async () => {
                 try {
-                    const result = await authorizedGetRequest("/user/suggest")
+                    const result = await authorizedGetRequest("https://laugher-server.onrender.com/user/suggest")
                     if(result.data != null){
                         setSuggestions(result.data)
                         return

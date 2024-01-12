@@ -12,7 +12,7 @@ function Profile({ setTab }) {
   useEffect(() => {
     const fetchUserJokes = async () => {
       try {
-        const requestURL = `/joke/user/${userId}/0`;
+        const requestURL = `https://laugher-server.onrender.com/joke/user/${userId}/0`;
         const result = await authorizedGetRequest(requestURL);
 
         if (result.data) {
@@ -32,7 +32,7 @@ function Profile({ setTab }) {
     setIsLoading(true)
     const isNearBottom = scrollableElement.scrollTop + scrollableElement.clientHeight >= scrollableElement.scrollHeight - 1;
     if(isNearBottom){
-      const requestURL = `/joke/user/${userId}/${offset}`;
+      const requestURL = `https://laugher-server.onrender.com/joke/user/${userId}/${offset}`;
       const result = await authorizedGetRequest(requestURL);
       if (result.data !== null) {
         if (result.data.data.length === 0) {
