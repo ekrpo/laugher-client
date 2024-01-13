@@ -20,6 +20,14 @@ function setFinishTime() {
   window.localStorage.setItem("finishTime", Date.now() + 100000);
 }
 
+const [ls, setLS] = useState(()=>{
+  localStorage.getItem("accessToken")
+})
+
+useEffect(()=>{
+  console.log("Updated")
+},[ls])
+
 async function refreshToken() {
   setFinishTime();
 
@@ -33,10 +41,9 @@ async function refreshToken() {
   axios.get("https://laugher-server.onrender.com/auth/refresh-token", config)
   .then(result=>{
     console.log(result)
-    window.localStorage.removeItem("accessToken")
-    window.localStorage.removeItem("refreshToken")
     window.localStorage.setItem("accessToken", result.data.accessToken)
     window.localStorage.setItem("refreshToken", result.data.refreshToken)
+    setLS(result.data.accessToken)
   })
   .catch(err=>{
     console.log("Auth error: ", err)
