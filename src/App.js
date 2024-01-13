@@ -12,87 +12,91 @@ import axios from 'axios';
 import socket from "./config/socket.js";
 import { logOut } from './components/ProfileOptions/ProfileOptions.js';
 
-function getFinishTime() {
-  return Number(window.localStorage.getItem("finishTime"));
-}
 
-function setFinishTime() {
-  window.localStorage.setItem("finishTime", Date.now() + 100000);
-}
-
-const [ls, setLS] = useState(()=>{
-  localStorage.getItem("accessToken")
-})
-
-useEffect(()=>{
-  console.log("Updated")
-},[ls])
-
-async function refreshToken() {
-  setFinishTime();
-
-  const headers = {
-    accessToken: window.localStorage.getItem("accessToken"),
-    refreshToken: window.localStorage.getItem("refreshToken")
-  }
-  const config = {
-    headers: headers
-  }
-  axios.get("https://laugher-server.onrender.com/auth/refresh-token", config)
-  .then(result=>{
-    console.log(result)
-    window.localStorage.setItem("accessToken", result.data.accessToken)
-    window.localStorage.setItem("refreshToken", result.data.refreshToken)
-    setLS(result.data.accessToken)
-  })
-  .catch(err=>{
-    console.log("Auth error: ", err)
-    logOut()
-  })
-
-}
-
-function getRemainingTime() {
-  return getFinishTime() - Date.now();
-}
-
-
-const useAuthentication = () => {
-  useEffect(() => {
-    let refreshTimeout;
-
-    const scheduleRefresh = () => {
-      // Clear any existing timeout
-      clearTimeout(refreshTimeout);
-
-      const remainingTime = getRemainingTime();
-
-      if (remainingTime <= 0) {
-        console.log("Token expired, refreshing now");
-        refreshToken();
-      } else {
-        console.log("Scheduling refresh in", remainingTime / 1000, "seconds");
-        refreshTimeout = setTimeout(() => {
-          refreshToken();
-          scheduleRefresh(); // Schedule the next refresh
-        }, remainingTime - 5000); // Refresh 5 seconds before token expiration
-      }
-    };
-
-    // Initial call to start the mechanism
-    scheduleRefresh();
-
-    // Clean up the timeout on component unmount
-    return () => {
-      clearTimeout(refreshTimeout);
-    };
-  }, []); // Empty dependency array ensures it runs only once on mount
-};
 
 
 
 function App() {
   const [tab, setTab] = useState("home")
+
+  function getFinishTime() {
+    return Number(window.localStorage.getItem("finishTime"));
+  }
+  
+  function setFinishTime() {
+    window.localStorage.setItem("finishTime", Date.now() + 100000);
+  }
+  
+  const [ls, setLS] = useState(()=>{
+    localStorage.getItem("accessToken")
+  })
+  
+  
+  
+  async function refreshToken() {
+    setFinishTime();
+  
+    const headers = {
+      accessToken: window.localStorage.getItem("accessToken"),
+      refreshToken: window.localStorage.getItem("refreshToken")
+    }
+    const config = {
+      headers: headers
+    }
+    axios.get("https://laugher-server.onrender.com/auth/refresh-token", config)
+    .then(result=>{
+      console.log(result)
+      window.localStorage.setItem("accessToken", result.data.accessToken)
+      window.localStorage.setItem("refreshToken", result.data.refreshToken)
+      setLS(result.data.accessToken)
+    })
+    .catch(err=>{
+      console.log("Auth error: ", err)
+      logOut()
+    })
+  
+  }
+  
+  function getRemainingTime() {
+    return getFinishTime() - Date.now();
+  }
+  
+  
+  const useAuthentication = () => {
+    useEffect(() => {
+      let refreshTimeout;
+  
+      const scheduleRefresh = () => {
+        // Clear any existing timeout
+        clearTimeout(refreshTimeout);
+  
+        const remainingTime = getRemainingTime();
+  
+        if (remainingTime <= 0) {
+          console.log("Token expired, refreshing now");
+          refreshToken();
+        } else {
+          console.log("Scheduling refresh in", remainingTime / 1000, "seconds");
+          refreshTimeout = setTimeout(() => {
+            refreshToken();
+            scheduleRefresh(); // Schedule the next refresh
+          }, remainingTime - 5000); // Refresh 5 seconds before token expiration
+        }
+      };
+  
+      // Initial call to start the mechanism
+      scheduleRefresh();
+  
+      // Clean up the timeout on component unmount
+      return () => {
+        clearTimeout(refreshTimeout);
+      };
+    }, []); // Empty dependency array ensures it runs only once on mount
+  };
+
+  useEffect(()=>{
+    console.log("Updated")
+  },[ls])
   
   const id = window.localStorage.getItem("id");
   socket.on("connection", () => {
