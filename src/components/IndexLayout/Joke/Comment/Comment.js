@@ -15,7 +15,7 @@ function Comment({ accessToken, item, joke }) {
 
   async function getCommentReplies(clickedComment) {
     try {
-      const result = await authorizedGetRequest(`/comment/replies/${clickedComment.id}/offset/${0}`, accessToken);
+      const result = await authorizedGetRequest(`https://laugher-server.onrender.com/comment/replies/${clickedComment.id}/offset/${0}`, accessToken);
       if (result.data !== null) {
         setCommentReplies(result.data);
         setRepliesToggle(true);
@@ -26,7 +26,7 @@ function Comment({ accessToken, item, joke }) {
   }
 
   async function likeUnlikeComment(commentId, action) {
-    const endpoint = action === "like" ? `/comment/like/${item.author_id}/` : "/comment/unlike/";
+    const endpoint = action === "like" ? `https://laugher-server.onrender.com/comment/like/${item.author_id}/` : "https://laugher-server.onrender.com/comment/unlike/";
     const { data, err } = await authorizedPutRequest(`${endpoint}${commentId}`, accessToken);
 
     if (data !== null) {
