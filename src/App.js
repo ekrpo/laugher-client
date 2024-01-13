@@ -30,7 +30,7 @@ async function refreshToken() {
   const config = {
     headers: headers
   }
-  axios.get("/auth/refresh-token", config)
+  axios.get("https://laugher-server.onrender.com/auth/refresh-token", config)
   .then(result=>{
     console.log(result)
     window.localStorage.setItem("accessToken", result.data.accessToken)
