@@ -30,7 +30,7 @@ export async function authorizedGetRequest(requestUrl, accessToken){
 export async function authorizedPutRequest(requestURL, accessToken){
   config.headers.accessToken = accessToken
   try{
-    const initialResponse = await axios.put(requestURL, config)
+    const initialResponse = await axios.put(requestURL, {},config)
     return new RequestResult(initialResponse.data, null)
 }catch(error){
     return new RequestResult(null, <Error errMessage="Error" />);
