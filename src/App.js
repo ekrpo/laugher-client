@@ -31,8 +31,8 @@ async function refreshToken() {
       headers: headers
     }
     const result = await axios.get("/auth/refresh-token", config);
-    window.localStorage.setItem("accessToken", result.headers.get("accessToken"))
-    window.localStorage.setItem("refreshToken", result.headers.get("refreshToken"))
+    window.localStorage.setItem("accessToken", result.data.accessToken)
+    window.localStorage.setItem("refreshToken", result.data.refreshToken)
   } catch (error) {
     console.log("Auth error: ", error)
     await logOut()

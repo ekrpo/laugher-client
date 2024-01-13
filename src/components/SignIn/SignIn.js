@@ -26,8 +26,8 @@ function SignIn() {
             window.localStorage.setItem("firstName", result.data.firstName)
             window.localStorage.setItem("lastName", result.data.lastName)
             window.localStorage.setItem("id", result.data.id)
-            window.localStorage.setItem("accessToken", result.headers["accessToken"])
-            window.localStorage.setItem("refreshToken", result.headers["refreshToken"])
+            window.localStorage.setItem("accessToken", result.data.accessToken)
+            window.localStorage.setItem("refreshToken", result.data.refreshToken)
             window.location = "/"
         })
         .catch(err => {
