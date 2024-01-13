@@ -21,9 +21,16 @@ function Notifications({setNotifToggle, notifToggle}){
     }
 
     async function getUserNotifications(){
+        const headers = {
+            accessToken: window.localStorage.getItem("accessToken"),
+            refreshToken: window.localStorage.getItem("refreshToken")
+          }
+          const config = {
+            headers: headers
+          }
         try {
-            const data = await axios.get("https://laugher-server.onrender.com/notifications")
-            await axios.put("https://laugher-server.onrender.com/notifications/clear-counter")
+            const data = await axios.get("https://laugher-server.onrender.com/notifications", config)
+            await axios.put("https://laugher-server.onrender.com/notifications/clear-counter", {}, config)
             console.log(data.data)
             setNotifications(data.data.reverse())
             

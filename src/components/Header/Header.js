@@ -39,8 +39,15 @@ function Header({socket}) {
   }
 
   async function getNotificationCounter(){
+    const headers = {
+      accessToken: window.localStorage.getItem("accessToken"),
+      refreshToken: window.localStorage.getItem("refreshToken")
+    }
+    const config = {
+      headers: headers
+    }
     try {
-      const data = await axios.get("https://laugher-server.onrender.com/notifications/notification-counter")
+      const data = await axios.get("https://laugher-server.onrender.com/notifications/notification-counter", config)
       setNotificationCounter(data.data.notification_counter)
     } catch (error) {
       console.log(error)

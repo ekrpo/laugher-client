@@ -23,7 +23,16 @@ function setFinishTime() {
 async function refreshToken() {
   setFinishTime();
   try {
-    await axios.get("/auth/refresh-token");
+    const headers = {
+      accessToken: window.localStorage.getItem("accessToken"),
+      refreshToken: window.localStorage.getItem("refreshToken")
+    }
+    const config = {
+      headers: headers
+    }
+    const result = await axios.get("/auth/refresh-token", config);
+    window.localStorage.setItem("accessToken", result.headers.get("accessToken"))
+    window.localStorage.setItem("refreshToken", result.headers.get("refreshToken"))
   } catch (error) {
     console.log("Auth error: ", error)
     await logOut()

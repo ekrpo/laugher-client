@@ -2,7 +2,14 @@ import "./profile_options.scss"
 import axios from "axios"
 
 export function logOut(){
-    axios.delete("https://laugher-server.onrender.com/auth/signout")
+    const headers = {
+        accessToken: window.localStorage.getItem("accessToken"),
+        refreshToken: window.localStorage.getItem("refreshToken")
+      }
+      const config = {
+        headers: headers
+      }
+    axios.delete("https://laugher-server.onrender.com/auth/signout", config)
     .then(res=>{
         localStorage.clear()
         window.location=res.data.redirectUrl
