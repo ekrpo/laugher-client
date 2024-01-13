@@ -49,7 +49,8 @@ function App() {
     })
     .catch(err=>{
       console.log("Auth error: ", err)
-      logOut()
+      window.localStorage.clear()
+      window.location = "/auth/signin"
     })
   
   }
