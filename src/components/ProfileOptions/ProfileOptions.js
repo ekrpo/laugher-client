@@ -9,6 +9,7 @@ export function logOut(){
       const config = {
         headers: headers
       }
+      config.headers.accessToken = accessToken
     axios.delete("https://laugher-server.onrender.com/auth/signout", config)
     .then(res=>{
         localStorage.clear()

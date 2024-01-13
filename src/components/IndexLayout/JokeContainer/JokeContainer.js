@@ -1,7 +1,7 @@
 import Joke from "../Joke/Joke";
 import "./joke_container.scss";
 
-function JokeContainer({ socket, setTab, jokeList, setJokes }) {
+function JokeContainer({ accessToken, socket, setTab, jokeList, setJokes }) {
   const jokes = jokeList || [];
 
   return (
@@ -19,6 +19,7 @@ function JokeContainer({ socket, setTab, jokeList, setJokes }) {
               setJokes={setJokes}
               jokes={jokes}
               socket={socket}
+              accessToken={accessToken}
             />
           );
         })

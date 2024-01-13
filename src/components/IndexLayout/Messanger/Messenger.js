@@ -3,7 +3,7 @@ import { authorizedGetRequest } from "../../../utils/authorizedRequest.js";
 import { useState, useEffect } from "react";
 import ChatBox from "../../ChatBox/ChatBox.js";
 
-function Messenger({socket}) {
+function Messenger({accessToken, socket}) {
   const [following, setFollowing] = useState([]);
   const [chatToggle, setChatToggle] = useState(false);
   const [chatUser, setChatUser] = useState({});
@@ -24,7 +24,7 @@ function Messenger({socket}) {
 
   async function getFollowingUsers() {
     try {
-      const { data } = await authorizedGetRequest("https://laugher-server.onrender.com/follow/get/following");
+      const { data } = await authorizedGetRequest("https://laugher-server.onrender.com/follow/get/following", accessToken);
       if (data != null) {
         setFollowing(data);
         setFiltered(data);
@@ -75,7 +75,7 @@ function Messenger({socket}) {
           </div>
         ))}
       </div>
-      {chatToggle ? <ChatBox socket={socket} user={chatUser} closeChat={closeChat} /> : ""}
+      {chatToggle ? <ChatBox accessToken={accessToken} socket={socket} user={chatUser} closeChat={closeChat} /> : ""}
     </section>
   );
 }

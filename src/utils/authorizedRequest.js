@@ -8,15 +8,16 @@ class RequestResult{
     }
 }
 
-const headers = {
+let headers = {
   accessToken: window.localStorage.getItem("accessToken"),
   refreshToken: window.localStorage.getItem("refreshToken")
 }
-const config = {
+let config = {
   headers: headers
 }
 
-export async function authorizedGetRequest(requestUrl){
+export async function authorizedGetRequest(requestUrl, accessToken){
+  config.headers.accessToken = accessToken
   try{
       const initialResponse = await axios.get(requestUrl, config)
       return new RequestResult(initialResponse.data, null)
@@ -26,7 +27,8 @@ export async function authorizedGetRequest(requestUrl){
 }
 
 
-export async function authorizedPutRequest(requestURL){
+export async function authorizedPutRequest(requestURL, accessToken){
+  config.headers.accessToken = accessToken
   try{
     const initialResponse = await axios.put(requestURL, config)
     return new RequestResult(initialResponse.data, null)
@@ -35,7 +37,8 @@ export async function authorizedPutRequest(requestURL){
 }  
 }
 
-export async function authorizedPostRequest(requestUrl, payload, headers){
+export async function authorizedPostRequest(requestUrl, payload, headers, accessToken){
+  config.headers.accessToken = accessToken
   try{
     const initialResponse = await axios.post(requestUrl, payload, config)
     return new RequestResult(initialResponse.data, null)
@@ -44,7 +47,8 @@ export async function authorizedPostRequest(requestUrl, payload, headers){
   }   
 }
 
-export async function authorizedDeleteRequest(requestURL){
+export async function authorizedDeleteRequest(requestURL, accessToken){
+  config.headers.accessToken = accessToken
   try{
     const initialResponse = await axios.delete(requestURL, config)
     return new RequestResult(initialResponse.data, null)

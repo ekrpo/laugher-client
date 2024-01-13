@@ -2,18 +2,18 @@ import { useState } from "react"
 import "./follow_button.scss"
 import { authorizedPutRequest } from "../../utils/authorizedRequest"
 
-function FollowButton({userId, followId}) {
+function FollowButton({ accessToken, userId, followId}) {
     const [following, setFollowing] = useState(followId ? true : false)
     const id = window.localStorage.getItem("id")
 
     async function follow(userId){
-        const {data, err } = await authorizedPutRequest(`https://laugher-server.onrender.com/follow/${userId}`)
+        const {data, err } = await authorizedPutRequest(`https://laugher-server.onrender.com/follow/${userId}`, accessToken)
         if(data != null){
             setFollowing(true)
         }
     }
     async function unfollow(userId){
-        const {data, err } = await authorizedPutRequest(`/follow/undo/${userId}`)
+        const {data, err } = await authorizedPutRequest(`/follow/undo/${userId}`, accessToken)
         if(data != null){
             setFollowing(false)
         }

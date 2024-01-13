@@ -27,18 +27,14 @@ function App() {
     window.localStorage.setItem("finishTime", Date.now() + 100000);
   }
   
-  const [ls, setLS] = useState(()=>{
-    localStorage.getItem("accessToken")
-  })
-  
-  
+  const [accessToken, setAccessToken] = useState(window.localStorage.getItem("accessToken"))
+  const [refreshTokenValue, setRefreshTokenValue] = useState(window.localStorage.getItem("refreshToken"))
   
   async function refreshToken() {
     setFinishTime();
   
     const headers = {
-      accessToken: window.localStorage.getItem("accessToken"),
-      refreshToken: window.localStorage.getItem("refreshToken")
+      refreshToken: refreshTokenValue
     }
     const config = {
       headers: headers
@@ -48,7 +44,8 @@ function App() {
       console.log(result)
       window.localStorage.setItem("accessToken", result.data.accessToken)
       window.localStorage.setItem("refreshToken", result.data.refreshToken)
-      setLS(result.data.accessToken)
+      setAccessToken(result.data.accessToken)
+      setRefreshTokenValue(result.data.refreshToken)
     })
     .catch(err=>{
       console.log("Auth error: ", err)
@@ -94,9 +91,6 @@ function App() {
     }, []); // Empty dependency array ensures it runs only once on mount
   };
 
-  useEffect(()=>{
-    console.log("Updated")
-  },[ls])
   
   const id = window.localStorage.getItem("id");
   socket.on("connection", () => {
@@ -111,10 +105,10 @@ function App() {
           <Route path="/auth/signup" element={<AuthLayout socket={socket} tab={tab} setTab={setTab} children={<SignUp/>}/>}/>
           <Route path="/auth/signin" element={<AuthLayout socket={socket} tab={tab} setTab={setTab}  children={<SignIn  />}/>}/>
           <Route path="/auth/email-verification" element={<AuthLayout socket={socket} tab={tab} setTab={setTab}  children={<EmailVerification />}/>}/>
-          <Route path="/user/:userId" element={<ProfileLayout socket={socket} tab={tab} setTab={setTab} />}/>
-          <Route path="/public" element={<IndexLayout socket={socket} tab="public" setTab={setTab} />}/>
-          <Route path="/messenger" element={<MessengerMobileLayout socket={socket} tab="messenger" setTab={setTab} />}/>
-          <Route path="/" element={<IndexLayout socket={socket} tab={"home"} setTab={setTab} />}/>
+          <Route path="/user/:userId"  element={<ProfileLayout accessToken={accessToken} socket={socket} tab={tab} setTab={setTab} />}/>
+          <Route path="/public"  element={<IndexLayout socket={socket} accessToken={accessToken} tab="public" setTab={setTab} />}/>
+          <Route path="/messenger"  element={<MessengerMobileLayout accessToken={accessToken} socket={socket} tab="messenger" setTab={setTab} />}/>
+          <Route path="/"  element={<IndexLayout socket={socket} accessToken={accessToken} tab={"home"} setTab={setTab} />}/>
         </Routes>
       </BrowserRouter>
   );

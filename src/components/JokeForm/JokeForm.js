@@ -8,7 +8,7 @@ import { authorizedPostRequest } from "../../utils/authorizedRequest";
 import { IoIosSend } from "react-icons/io";
 
 
-function JokeForm({jokes, setJokes}){
+function JokeForm({accessToken, jokes, setJokes}){
     const username = window.localStorage.getItem("username")
     const profilePhoto = window.localStorage.getItem("profilePhoto")
     let [uploading, setUploading] = useState(false)
@@ -63,7 +63,7 @@ function JokeForm({jokes, setJokes}){
             setUploading(true)
             const {data, err} = await authorizedPostRequest("https://laugher-server.onrender.com/joke/create", jokeData, {
                 "Content-Type": "multipart/form-data"
-            })
+            }, accessToken)
             if(data != null){
                 const newElement = {
                     audio: blob,

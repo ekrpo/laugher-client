@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { authorizedPostRequest, authorizedGetRequest } from "../../utils/authorizedRequest.js";
 import { dateTimeFormat } from "../../utils/dataFormats.js";
 
-function ChatBox({ socket, closeChat, user }) {
+function ChatBox({ accessToken, socket, closeChat, user }) {
   const id = window.localStorage.getItem("id");
   const [message, setMessage] = useState("");
   let [messages, setMessages] = useState([]);
@@ -33,7 +33,7 @@ function ChatBox({ socket, closeChat, user }) {
       message: message,
     };
 
-    await authorizedPostRequest(`https://laugher-server.onrender.com/message/add`, payload, {});
+    await authorizedPostRequest(`https://laugher-server.onrender.com/message/add`, payload, {}, accessToken);
 
     setMessage("");
     scrollToBottom();
@@ -42,7 +42,7 @@ function ChatBox({ socket, closeChat, user }) {
 async function getMessages() {
   try {
     setIsLoading(true)
-    const { data } = await authorizedGetRequest(`https://laugher-server.onrender.com/message/all/${user.id}/${offset}`);
+    const { data } = await authorizedGetRequest(`https://laugher-server.onrender.com/message/all/${user.id}/${offset}`, accessToken);
     if (data !== null && data.length > 0) {
       // Save the current scroll position before loading more messages
       const currentScrollTop = conversationContainerRef.current.scrollTop;

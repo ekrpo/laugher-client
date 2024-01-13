@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import "./profile_summary.scss"
 import {authorizedGetRequest} from "../../utils/authorizedRequest"
 
-function ProfileSummary({userId}){
+function ProfileSummary({accessToken, userId}){
 
 
     const profilePhoto = window.localStorage.getItem("profilePhoto")
@@ -12,7 +12,7 @@ function ProfileSummary({userId}){
     useEffect(()=>{
         const fetchData = async () => {
             try {
-                const result = await authorizedGetRequest(`https://laugher-server.onrender.com/user/info/${userId || 0}`)
+                const result = await authorizedGetRequest(`https://laugher-server.onrender.com/user/info/${userId || 0}`, accessToken)
                 if(result && result.data != null){
                     setUsersInfo({...usersInfo, 
                         followings: result.data.followings, 

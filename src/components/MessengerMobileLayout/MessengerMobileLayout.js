@@ -8,10 +8,10 @@ import "./messenger_mobile_layout.scss"
 function MessengerMobileLayout({socket, tab, setTab}) {
 
     return <>
-        <Header socket={socket}/>
+        <Header accessToken={accessToken} socket={socket}/>
         <main id="index-page">
-            <LeftSection setTab={setTab}/>
-            <Messenger socket={socket} setTab={setTab}/>
+            <LeftSection accessToken={accessToken} setTab={setTab}/>
+            <Messenger accessToken={accessToken} socket={socket} setTab={setTab}/>
         </main>
         <Footer tab={tab} setTab={setTab}/>
     </>

@@ -6,14 +6,14 @@ import Footer from "../Footer/Footer.js"
 import "./index_layout.scss"
 import { useState } from "react"
 
-function IndexLayout({socket, tab, setTab}) {
+function IndexLayout({accessToken, socket, tab, setTab}) {
     const [screenWidth] = useState(window.innerWidth)
     return <>
-        <Header socket={socket}/>
+        <Header accessToken={accessToken} socket={socket}/>
         <main id="index-page">
-            <LeftSection setTab={setTab}/>
-            <Home socket={socket} tab={tab} setTab={setTab}/>
-            {screenWidth > 1024 ? <Messenger socket={socket} setTab={setTab}/> : ""}
+            <LeftSection accessToken={accessToken} setTab={setTab}/>
+            <Home accessToken={accessToken} socket={socket} tab={tab} setTab={setTab}/>
+            {screenWidth > 1024 ? <Messenger accessToken={accessToken} socket={socket} setTab={setTab}/> : ""}
         </main>
         <Footer tab={tab} setTab={setTab}/>
     </>

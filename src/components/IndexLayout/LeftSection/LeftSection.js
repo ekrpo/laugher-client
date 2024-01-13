@@ -6,12 +6,12 @@ import "./left_section.scss"
 
 
 
-function LeftSection({setTab}) {
+function LeftSection({accessToken, setTab}) {
     return <section id="left-section">
         <div id="inner-left-section">
-            <ProfileSummary/>
-            <Navbar setTab={setTab}/>
-            <Suggestions/>
+            <ProfileSummary accessToken={accessToken}/>
+            <Navbar accessToken={accessToken} setTab={setTab}/>
+            <Suggestions accessToken={accessToken}/>
         </div>
 
     </section>

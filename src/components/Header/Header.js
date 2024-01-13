@@ -9,7 +9,7 @@ import { authorizedGetRequest } from "../../utils/authorizedRequest.js";
 import Notifications from "../Notifications/Notifications.js";
 import axios from "axios";
 
-function Header({socket}) {
+function Header({ accessToken, socket}) {
   const username = window.localStorage.getItem("username");
   const profilePhoto = window.localStorage.getItem("profilePhoto");
   const [searchToggle, setSearchToggle] = useState(false);
@@ -28,8 +28,7 @@ function Header({socket}) {
     try {
       const searchTerm = e.target.value.trim() === "" ? "" : e.target.value.trim();
       setSearchedInput(searchTerm);
-
-      const result = await authorizedGetRequest(`https://laugher-server.onrender.com/user/search/${searchTerm}`);
+      const result = await authorizedGetRequest(`https://laugher-server.onrender.com/user/search/${searchTerm}`, accessToken);
       if (result && result.data !== null) {
         setSearchedUsers(result.data);
       }
@@ -39,14 +38,16 @@ function Header({socket}) {
   }
 
   async function getNotificationCounter(){
-    const headers = {
-      accessToken: window.localStorage.getItem("accessToken"),
-      refreshToken: window.localStorage.getItem("refreshToken")
-    }
-    const config = {
-      headers: headers
-    }
+
     try {
+      const headers = {
+        accessToken: window.localStorage.getItem("accessToken"),
+        refreshToken: window.localStorage.getItem("refreshToken")
+      }
+      const config = {
+        headers: headers
+      }
+      config.headers.accessToken = accessToken
       const data = await axios.get("https://laugher-server.onrender.com/notifications/notification-counter", config)
       setNotificationCounter(data.data.notification_counter)
     } catch (error) {
@@ -82,7 +83,7 @@ function Header({socket}) {
         <h1>Laugher</h1>
       </div>
 
-      {notifToggle ? <Notifications setNotifToggle={setNotifToggle} notifToggle={notifToggle}/> : ""}
+      {notifToggle ? <Notifications accessToken={accessToken} setNotifToggle={setNotifToggle} notifToggle={notifToggle}/> : ""}
 
       {username ? (
         <>
@@ -107,7 +108,7 @@ function Header({socket}) {
                       <img src={user.profile_picture_url != null ? user.profile_picture_url : process.env.PUBLIC_URL + "/default_profile.png"} alt="" />
                       <h4>{user.username}</h4>
                     </div>
-                    <FollowButton followId={user.receiver_id} userId={user.id} />
+                    <FollowButton accessToken={accessToken} followId={user.receiver_id} userId={user.id} />
                   </div>
                 ))
               )}
@@ -133,7 +134,7 @@ function Header({socket}) {
 
             </div>
           </div>
-          {optionsToggle && <ProfileOptions />}
+          {optionsToggle && <ProfileOptions accessToken={accessToken}/>}
         </>
       ) : (
         ""

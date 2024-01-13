@@ -4,7 +4,7 @@ import { authorizedGetRequest } from "../../utils/authorizedRequest.js";
 import ProfileSummary from "../ProfileSummary/ProfileSummary.js";
 import JokeContainer from "../IndexLayout/JokeContainer/JokeContainer.js";
 
-function Profile({ setTab }) {
+function Profile({accessToken, setTab }) {
   const [jokes, setJokes] = useState([]);
   const userId = document.URL.split("/")[4] !== "profile" ? document.URL.split("/")[4] : window.localStorage.getItem("id");
   const [offset, setOffset] = useState(0)
@@ -13,7 +13,7 @@ function Profile({ setTab }) {
     const fetchUserJokes = async () => {
       try {
         const requestURL = `https://laugher-server.onrender.com/joke/user/${userId}/0`;
-        const result = await authorizedGetRequest(requestURL);
+        const result = await authorizedGetRequest(requestURL, accessToken);
 
         if (result.data) {
           const updatedJokes = result.data.data.map((joke) => ({ ...joke, commentsToggle: false, offset: 0 }));
@@ -33,7 +33,7 @@ function Profile({ setTab }) {
     const isNearBottom = scrollableElement.scrollTop + scrollableElement.clientHeight >= scrollableElement.scrollHeight - 1;
     if(isNearBottom){
       const requestURL = `https://laugher-server.onrender.com/joke/user/${userId}/${offset}`;
-      const result = await authorizedGetRequest(requestURL);
+      const result = await authorizedGetRequest(requestURL, accessToken);
       if (result.data !== null) {
         if (result.data.data.length === 0) {
           return;

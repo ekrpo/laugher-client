@@ -3,7 +3,7 @@ import { useState } from "react"
 import "./comment_form.scss"
 import { authorizedPostRequest } from "../../utils/authorizedRequest"
 
-function CommentForm({item, commentCounter, setCommentCounter, setComments, joke, comments }){
+function CommentForm({accessToken, item, commentCounter, setCommentCounter, setComments, joke, comments }){
 
     const [comment, setComment ] = useState("")
     function postComment(jokeId, parrentCommentId, e){
@@ -21,7 +21,7 @@ function CommentForm({item, commentCounter, setCommentCounter, setComments, joke
             authorId: joke.author_id
         }
         async function postData(){
-            const {data, err} = await authorizedPostRequest("https://laugher-server.onrender.com/comment/add", payload, {})
+            const {data, err} = await authorizedPostRequest("https://laugher-server.onrender.com/comment/add", payload, {}, accessToken)
             if(data != null){
                 item.replies += 1
                 setCommentCounter(commentCounter + 1)

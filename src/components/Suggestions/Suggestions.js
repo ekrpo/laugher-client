@@ -5,13 +5,13 @@ import { useEffect, useState } from "react"
 import { authorizedGetRequest } from "../../utils/authorizedRequest.js"
 
 
-function Suggestions() {
+function Suggestions({accessToken}) {
     const [suggestions, setSuggestions] = useState([])
     function getSuggestions(){
 
             const fetchData = async () => {
                 try {
-                    const result = await authorizedGetRequest("https://laugher-server.onrender.com/user/suggest")
+                    const result = await authorizedGetRequest("https://laugher-server.onrender.com/user/suggest", accessToken)
                     if(result.data != null){
                         setSuggestions(result.data)
                         return
@@ -40,7 +40,7 @@ function Suggestions() {
                     <h4>{user.username}</h4>
                 </div>
                 <div id="btn-container">
-                    <FollowButton followId={null} userId={user.id}/>
+                    <FollowButton accessToken={accessToken} followId={null} userId={user.id}/>
                 </div>
             </div>
         })}

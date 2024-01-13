@@ -5,7 +5,7 @@ import JokeContainer from "../../IndexLayout/JokeContainer/JokeContainer.js";
 import JokeForm from "../../JokeForm/JokeForm.js";
 import ProfileSummary from "../../ProfileSummary/ProfileSummary.js";
 
-function HomePage({ socket, tab, setTab }) {
+function HomePage({ accessToken, socket, tab, setTab }) {
   const [jokes, setJokes] = useState([]);
   const [offset, setOffset] = useState(10);
   const [sortType, setSortType] = useState("latest");
@@ -16,7 +16,7 @@ function HomePage({ socket, tab, setTab }) {
     try {
       const requestURL = `https://laugher-server.onrender.com/joke/${tab}/${type}/0`;
 
-      const result = await authorizedGetRequest(requestURL);
+      const result = await authorizedGetRequest(requestURL, accessToken);
       if (result.data !== null) {
         const updatedJokes = result.data.data.map((joke) => ({
           ...joke,
@@ -43,7 +43,7 @@ function HomePage({ socket, tab, setTab }) {
     const isNearBottom = scrollableElement.scrollTop + scrollableElement.clientHeight >= scrollableElement.scrollHeight - 1;
     if(isNearBottom){
       const requestURL = `/joke/${tab}/${sortType}/${offset}`;
-      const result = await authorizedGetRequest(requestURL);
+      const result = await authorizedGetRequest(requestURL, accessToken);
       if (result.data !== null) {
         if (result.data.data.length === 0) {
           return;
@@ -68,12 +68,12 @@ function HomePage({ socket, tab, setTab }) {
     <section id="home-section">
       {typeof tab === "number" ? (
         <>
-          <ProfileSummary userId={tab} />
-          <JokeContainer socket={socket} setTab={setTab} jokeList={jokes || []} setJokes={setJokes} />
+          <ProfileSummary accessToken={accessToken} userId={tab} />
+          <JokeContainer accessToken={accessToken} socket={socket} setTab={setTab} jokeList={jokes || []} setJokes={setJokes} />
         </>
       ) : (
         <>
-          <JokeForm jokes={jokes} setJokes={setJokes} />
+          <JokeForm accessToken={accessToken} jokes={jokes} setJokes={setJokes} />
           <div id="sort-form">
             <hr id="left-line" />
             <select onChange={(e) => setSortType(e.target.value)}>
@@ -82,7 +82,7 @@ function HomePage({ socket, tab, setTab }) {
             </select>
             <hr id="right-line" />
           </div>
-          <JokeContainer socket={socket} setTab={setTab} jokeList={jokes || []} setJokes={setJokes} />
+          <JokeContainer accessToken={accessToken} socket={socket} setTab={setTab} jokeList={jokes || []} setJokes={setJokes} />
         </>
       )}
       {isLoading ? <img className="loading" src="loading.gif" alt=""/> : ""}

@@ -7,7 +7,7 @@ import CommentForm from "../../../CommentForm/CommentForm";
 import { authorizedGetRequest, authorizedPutRequest } from "../../../../utils/authorizedRequest";
 import { dateTimeFormat } from "../../../../utils/dataFormats.js";
 
-function Comment({ item, joke }) {
+function Comment({ accessToken, item, joke }) {
   const [repliesToggle, setRepliesToggle] = useState(false);
   const [commentReplies, setCommentReplies] = useState([]);
   const [commentCounter, setCommentCounter] = useState(item.replies);
@@ -15,7 +15,7 @@ function Comment({ item, joke }) {
 
   async function getCommentReplies(clickedComment) {
     try {
-      const result = await authorizedGetRequest(`/comment/replies/${clickedComment.id}/offset/${0}`);
+      const result = await authorizedGetRequest(`/comment/replies/${clickedComment.id}/offset/${0}`, accessToken);
       if (result.data !== null) {
         setCommentReplies(result.data);
         setRepliesToggle(true);
@@ -27,7 +27,7 @@ function Comment({ item, joke }) {
 
   async function likeUnlikeComment(commentId, action) {
     const endpoint = action === "like" ? `/comment/like/${item.author_id}/` : "/comment/unlike/";
-    const { data, err } = await authorizedPutRequest(`${endpoint}${commentId}`);
+    const { data, err } = await authorizedPutRequest(`${endpoint}${commentId}`, accessToken);
 
     if (data !== null) {
       item.reaction_counter += action === "like" ? 1 : -1;
@@ -46,7 +46,7 @@ function Comment({ item, joke }) {
         </div>
         <div id="comment-text">{item.content}</div>
         <div id="comment-interactions">
-          <CommentForm item={item} setCommentCounter={setCommentCounter} commentCounter={commentCounter} setComments={setCommentReplies} joke={joke} comments={commentReplies} />
+          <CommentForm accessToken={accessToken} item={item} setCommentCounter={setCommentCounter} commentCounter={commentCounter} setComments={setCommentReplies} joke={joke} comments={commentReplies} />
           <div id="interactions-container">
             <div id="comment-statistic">
               {item.replies > 0 ? (
@@ -75,7 +75,7 @@ function Comment({ item, joke }) {
         </div>
         <span id="comment-time">{dateTimeFormat(item.comment_time)}</span>
       </div>
-      {repliesToggle ? <CommentList className="replies" getComments={getCommentReplies} comments={commentReplies} setComments={setCommentReplies} onToggle={() => setRepliesToggle(!repliesToggle)} joke={item} /> : ""}
+      {repliesToggle ? <CommentList accessToken={accessToken} className="replies" getComments={getCommentReplies} comments={commentReplies} setComments={setCommentReplies} onToggle={() => setRepliesToggle(!repliesToggle)} joke={item} /> : ""}
     </div>
   );
 }

@@ -4,7 +4,7 @@ import axios from "axios"
 import { dateTimeFormat } from "../../utils/dataFormats"
 
 
-function Notifications({setNotifToggle, notifToggle}){
+function Notifications({accessToken, setNotifToggle, notifToggle}){
     const [notifications, setNotifications] = useState([])
 
     function formatNotification(type){
@@ -29,6 +29,7 @@ function Notifications({setNotifToggle, notifToggle}){
             headers: headers
           }
         try {
+            config.headers.accessToken = accessToken
             const data = await axios.get("https://laugher-server.onrender.com/notifications", config)
             await axios.put("https://laugher-server.onrender.com/notifications/clear-counter", {}, config)
             console.log(data.data)

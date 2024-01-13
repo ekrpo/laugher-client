@@ -20,7 +20,7 @@ import {
 } from "../../../utils/authorizedRequest.js";
 import { dateTimeFormat } from "../../../utils/dataFormats.js";
 
-function Joke({socket, joke, setJokes, jokes }) {
+function Joke({accessToken, socket, joke, setJokes, jokes }) {
   const [volume, setVolume] = useState(joke.reaction_value);
   const [submitionToggle, setSubmitionToggle] = useState(!!joke.reaction_value);
   const [comments, setComments] = useState([]);
@@ -41,7 +41,8 @@ function Joke({socket, joke, setJokes, jokes }) {
         const { data, err } = await authorizedPostRequest(
           "https://laugher-server.onrender.com/reaction/add",
           payload,
-          {}
+          {},
+          accessToken
         );
         if (data != null) {
           joke.reaction_counter = joke.reaction_counter + 1;
@@ -61,7 +62,8 @@ function Joke({socket, joke, setJokes, jokes }) {
     const fetchData = async () => {
       try {
         const result = await authorizedGetRequest(
-          `https://laugher-server.onrender.com/comment/all/${jokeId}/${offset}`
+          `https://laugher-server.onrender.com/comment/all/${jokeId}/${offset}`,
+          accessToken
         );
         if (result.data != null) {
           if (offset === 0) {
@@ -105,7 +107,7 @@ function Joke({socket, joke, setJokes, jokes }) {
   function getReactions(jokeId) {
     const fetchData = async () => {
       try {
-        const result = await authorizedGetRequest(`https://laugher-server.onrender.com/reaction/joke/${jokeId}`);
+        const result = await authorizedGetRequest(`https://laugher-server.onrender.com/reaction/joke/${jokeId}`, accessToken);
         if (result.data != null) {
           setReactions(result.data);
         }
@@ -122,7 +124,8 @@ function Joke({socket, joke, setJokes, jokes }) {
 
   async function deleteJoke(jokeId) {
     const { data } = await authorizedDeleteRequest(
-      `https://laugher-server.onrender.com/joke/delete/${jokeId}`
+      `https://laugher-server.onrender.com/joke/delete/${jokeId}`,
+      accessToken
     );
     if (data != null) {
       setJokes(jokes.filter((jokeItem) => jokeItem.id !== jokeId));
@@ -135,7 +138,8 @@ function Joke({socket, joke, setJokes, jokes }) {
       {
         description: editDescription,
       },
-      {}
+      {},
+      accessToken
     );
     if (data != null) {
       const jokeIndex = jokes.indexOf(jokes.find((item) => item.id === jokeId));
@@ -229,6 +233,7 @@ function Joke({socket, joke, setJokes, jokes }) {
         setComments={setComments}
         joke={joke}
         comments={comments}
+        accessToken
       />
       <div id="joke-statistics">
         {commentCounter > 0 ? (
@@ -263,6 +268,7 @@ function Joke({socket, joke, setJokes, jokes }) {
           onToggle={() => setCommentsToggle(!commentsToggle)}
           comments={comments}
           joke={joke}
+          accessToken={accessToken}
         />
       )}
     </div>

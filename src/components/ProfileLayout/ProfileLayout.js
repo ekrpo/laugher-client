@@ -7,13 +7,13 @@ import Profile from "../Profile/Profile.js"
 import LeftSection from "../IndexLayout/LeftSection/LeftSection.js"
 
 
-function ProfileLayout({socket, tab, setTab}) {
+function ProfileLayout({accessToken ,socket, tab, setTab}) {
     return <>
-        <Header socket={socket}/>
+        <Header accessToken={accessToken} socket={socket}/>
         <main id="index-page">
-            <LeftSection setTab={setTab}/>
-            <Profile userId={tab} setTab={setTab}/>
-            <Messenger socket={socket} setTab={setTab}/>
+            <LeftSection accessToken={accessToken} setTab={setTab}/>
+            <Profile accessToken={accessToken} userId={tab} setTab={setTab}/>
+            <Messenger accessToken={accessToken} socket={socket} setTab={setTab}/>
         </main>
         <Footer tab={tab} setTab={setTab}/>
     </>
