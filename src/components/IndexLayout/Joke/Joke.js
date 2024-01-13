@@ -233,7 +233,7 @@ function Joke({accessToken, socket, joke, setJokes, jokes }) {
         setComments={setComments}
         joke={joke}
         comments={comments}
-        accessToken
+        accessToken = {accessToken}
       />
       <div id="joke-statistics">
         {commentCounter > 0 ? (
