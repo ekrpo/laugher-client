@@ -10,7 +10,6 @@ import { useEffect, useState } from 'react';
 import MessengerMobileLayout from './components/MessengerMobileLayout/MessengerMobileLayout.js';
 import axios from 'axios';
 import socket from "./config/socket.js";
-import { logOut } from './components/ProfileOptions/ProfileOptions.js';
 
 
 
@@ -99,7 +98,7 @@ function App() {
   });
 
   socket.emit("connected", Number(id));
-  useAuthentication();
+  //useAuthentication();
   return (
       <BrowserRouter>
         <Routes>
