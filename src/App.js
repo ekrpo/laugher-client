@@ -32,6 +32,7 @@ async function refreshToken() {
   }
   axios.get("/auth/refresh-token", config)
   .then(result=>{
+    console.log(result)
     window.localStorage.setItem("accessToken", result.data.accessToken)
     window.localStorage.setItem("refreshToken", result.data.refreshToken)
   })
