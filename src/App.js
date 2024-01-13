@@ -22,21 +22,24 @@ function setFinishTime() {
 
 async function refreshToken() {
   setFinishTime();
-  try {
-    const headers = {
-      accessToken: window.localStorage.getItem("accessToken"),
-      refreshToken: window.localStorage.getItem("refreshToken")
-    }
-    const config = {
-      headers: headers
-    }
-    const result = await axios.get("/auth/refresh-token", config);
+
+  const headers = {
+    accessToken: window.localStorage.getItem("accessToken"),
+    refreshToken: window.localStorage.getItem("refreshToken")
+  }
+  const config = {
+    headers: headers
+  }
+  axios.get("/auth/refresh-token", config)
+  .then(result=>{
     window.localStorage.setItem("accessToken", result.data.accessToken)
     window.localStorage.setItem("refreshToken", result.data.refreshToken)
-  } catch (error) {
+  })
+  .catch(err=>{
     console.log("Auth error: ", error)
-    await logOut()
-  }
+    logOut()
+  })
+  
 }
 
 function getRemainingTime() {
