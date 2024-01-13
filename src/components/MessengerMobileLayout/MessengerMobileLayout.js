@@ -5,7 +5,7 @@ import Footer from "../Footer/Footer.js"
 import "./messenger_mobile_layout.scss"
 
 
-function MessengerMobileLayout({socket, tab, setTab}) {
+function MessengerMobileLayout({accessToken, socket, tab, setTab}) {
 
     return <>
         <Header accessToken={accessToken} socket={socket}/>
