@@ -51,7 +51,10 @@ function Header({socket}) {
       setNotificationCounter(data.data.notification_counter)
     } catch (error) {
       console.log(error)
-      window.location = "/auth/signin"
+      if(!document.URL,includes("auth")){
+        window.location = "/auth/signin"
+      }
+
     }
 
   }
