@@ -36,10 +36,10 @@ async function refreshToken() {
     window.localStorage.setItem("refreshToken", result.data.refreshToken)
   })
   .catch(err=>{
-    console.log("Auth error: ", error)
+    console.log("Auth error: ", err)
     logOut()
   })
-  
+
 }
 
 function getRemainingTime() {
