@@ -33,6 +33,8 @@ async function refreshToken() {
   axios.get("https://laugher-server.onrender.com/auth/refresh-token", config)
   .then(result=>{
     console.log(result)
+    window.localStorage.removeItem("accessToken")
+    window.localStorage.removeItem("refreshToken")
     window.localStorage.setItem("accessToken", result.data.accessToken)
     window.localStorage.setItem("refreshToken", result.data.refreshToken)
   })
