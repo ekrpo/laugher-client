@@ -55,8 +55,8 @@ function Profile({accessToken, setTab }) {
 
   return (
     <div id="profile">
-      <ProfileSummary userId={userId} />
-      <JokeContainer setTab={setTab} jokeList={jokes || []} setJokes={setJokes} />
+      <ProfileSummary accessToken={accessToken} userId={userId} />
+      <JokeContainer accessToken={accessToken} setTab={setTab} jokeList={jokes || []} setJokes={setJokes} />
     </div>
   );
 }
