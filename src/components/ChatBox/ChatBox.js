@@ -43,6 +43,7 @@ async function getMessages() {
   try {
     setIsLoading(true)
     const { data } = await authorizedGetRequest(`https://laugher-server.onrender.com/message/all/${user.id}/${offset}`, accessToken);
+    data.reverse()
     if (data !== null && data.length > 0) {
       // Save the current scroll position before loading more messages
       const currentScrollTop = conversationContainerRef.current.scrollTop;

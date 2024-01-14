@@ -13,7 +13,7 @@ function FollowButton({ accessToken, userId, followId}) {
         }
     }
     async function unfollow(userId){
-        const {data, err } = await authorizedPutRequest(`/follow/undo/${userId}`, accessToken)
+        const {data, err } = await authorizedPutRequest(`https://laugher-server.onrender.com/follow/undo/${userId}`, accessToken)
         if(data != null){
             setFollowing(false)
         }
